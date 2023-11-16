@@ -62,7 +62,7 @@ class DashboardViewController: UIViewController {
     }
     
     func setupUI(){
-        setFonts()
+//        setFonts()
         setFontColors()
         setupPlaceholderText()
         setupSearchTextField()
@@ -103,7 +103,7 @@ class DashboardViewController: UIViewController {
     func setupAllTableViews(){
         setupTableViews(tableView: cryptoCurrencyTableView, isSeparatorStyleNone: true, identifier: .cryptoTableViewCellIdentifier)
         setupTableViews(tableView: filterTableView, isSeparatorStyleNone: false, identifier: .filterTableViewCellIdentifier)
-        setupTableViews(tableView: searchTableView, isSeparatorStyleNone: false, identifier: .filterTableViewCellIdentifier)
+        setupTableViews(tableView: searchTableView, isSeparatorStyleNone: false, identifier: .searchTableViewCellIdentifier)
     }
     
     private func loadDataOnUI(){
@@ -140,9 +140,9 @@ class DashboardViewController: UIViewController {
     private func setupPlaceholderText(){
         let attributes = [
             NSAttributedString.Key.foregroundColor: UIColor(red: 0.042, green: 0.042, blue: 0.042, alpha: 0.3),
-                        NSAttributedString.Key.font : UIFont(name: "Inter-Medium", size: 13)
+//                        NSAttributedString.Key.font : UIFont(name: "Inter-Medium", size: 13)
         ]
-        searchTextField.attributedPlaceholder = NSAttributedString(string: .searchCryptoText, attributes:attributes as [NSAttributedString.Key : Any])
+        searchTextField.attributedPlaceholder = NSAttributedString(string: .searchCryptoText, attributes:attributes)
     }
     
     
@@ -210,7 +210,6 @@ class DashboardViewController: UIViewController {
     func downloadImage(from url: URL, forCell cell: SearchTableViewCell?) {
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
             DispatchQueue.main.async() {
                 if let safeCell = cell{
                     safeCell.iconImage.image = UIImage(data: data)
